@@ -1,0 +1,22 @@
+'   auto_openのプロシージャ名にするとエクセルbookを開いたと同時に自動で実行される。
+Sub auto_open()
+    
+'    F1ヘルプ無効
+    Application.OnKey "{F1}", ""
+
+'    ショートカット (Alt + s)
+   Application.OnKey "%{s}", "changeCollor"
+
+End Sub
+
+Sub changeCollor()
+    Dim strIn As String
+    strIn = InputBox("入力した文字列を含むセルを赤色にします。")
+        
+'   ReplaceFormatプロパティのInterior（セルの色）にColorIndex = 3（赤色）を設定する。
+    Application.ReplaceFormat.Interior.ColorIndex = 3
+    
+'   入力した文字列と部分一致のセルにReplaceFormatの属性を適用。（セルの色に赤色を適用）
+    Cells.Replace strIn, "", LookAt:=xlPart, ReplaceFormat:=True
+    
+End Sub
